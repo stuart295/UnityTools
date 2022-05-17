@@ -27,13 +27,21 @@ namespace StuTools
 
         public static GameObject MouseRaycast(int layerMask, float maxDistance)
         {
+            Vector3 hitPoint;
+            return MouseRaycast(layerMask, maxDistance, out hitPoint);
+        }
+
+        public static GameObject MouseRaycast(int layerMask, float maxDistance, out Vector3 hitPoint)
+        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, maxDistance, layerMask))
             {
+                hitPoint = hit.point;
                 return hit.collider.gameObject;
             }
 
+            hitPoint = Vector3.zero;
             return null;
         }
     }
