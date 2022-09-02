@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using System.Linq;
 
 namespace StuTools
 {
@@ -54,6 +56,34 @@ namespace StuTools
 
             hitPoint = Vector3.zero;
             return null;
+        }
+
+
+        /// <summary>
+        /// Raycasts against UI elements.
+        /// </summary>
+        /// <param name="eventSystem"></param>
+        /// <returns>A list of UI gameobjects hit by the raycast</returns>
+        public static List<GameObject> UIRaycast(EventSystem eventSystem)
+        {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(eventSystem);
+            Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
+            eventDataCurrentPosition.position = mousePos;
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+            return results.Select(res => res.gameObject).ToList();
+        }
+
+
+        /// <summary>
+        /// Raycasts against UI elements.
+        /// </summary>
+        /// <returns>A list of UI gameobjects hit by the raycast</returns>
+        public static List<GameObject> UIRaycast()
+        {
+            return UIRaycast(EventSystem.current);
         }
     }
 }
