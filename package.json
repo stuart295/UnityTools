@@ -1,0 +1,11 @@
+{
+  "name": "com.softsoft.stutools",
+  "version": "0.0.1",
+  "displayName": "StuTools",
+  "description": "A collection of scripts that I commonly use for my Unity projects.",
+  "unity": "2021.1",
+  "unityRelease": "0b5",
+  "author": {
+    "name": "Stuart Edwards"
+  }
+}
