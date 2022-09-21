@@ -29,13 +29,13 @@ namespace StuTools
 
         public static GameObject MouseRaycast(out Vector3 hitPoint)
         {
-            return MouseRaycast(new LayerMask(), Mathf.Infinity, out hitPoint);
+            return MouseRaycast(~(new LayerMask()), Mathf.Infinity, out hitPoint);
         }
 
         public static GameObject MouseRaycast()
         {
             Vector3 hitPoint;
-            return MouseRaycast(new LayerMask(), Mathf.Infinity, out hitPoint);
+            return MouseRaycast(~(new LayerMask()), Mathf.Infinity, out hitPoint);
         }
 
         public static GameObject MouseRaycast(int layerMask, float maxDistance)
