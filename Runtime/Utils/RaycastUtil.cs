@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 namespace StuTools
 {
@@ -84,6 +85,35 @@ namespace StuTools
         public static List<GameObject> UIRaycast()
         {
             return UIRaycast(EventSystem.current);
+        }
+
+
+        /// <summary>
+        /// Returns a random position within a ring defined by an inner and outer radius.
+        /// </summary>
+        public static Vector3 RandomPosInRing(float innerRadius, float outerRadius)
+        {
+            Vector2 dir = Random.insideUnitCircle.normalized;
+            float radius = Random.Range(innerRadius, outerRadius);
+
+            return new Vector3(dir.x, 0, dir.y) * radius;
+
+        }
+
+        /// <summary>
+        /// Checks whether the distance between two points is closer than a given threshold.
+        /// </summary>
+        public static bool IsCloserThan(Vector3 pointA, Vector3 pointB, float distance)
+        {
+            return (pointB - pointA).sqrMagnitude < distance * distance;
+        }
+
+        /// <summary>
+        /// Checks whether the distance between two points is greater than a given threshold.
+        /// </summary>
+        public static bool IsFurtherThan(Vector3 pointA, Vector3 pointB, float distance)
+        {
+            return (pointB - pointA).sqrMagnitude > distance * distance;
         }
     }
 }
